@@ -19,7 +19,7 @@ pub fn parseSelectionSet(p: *Parser) anyerror!ast.SelectionSetNode {
 
 pub fn parseSelections(p: *Parser) ![]ast.SelectionNode {
     p.debug("parseSelections");
-    var nodes = std.ArrayList(ast.SelectionNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.SelectionNode).init(p.allocator);
     errdefer nodes.deinit();
 
     _ = try p.expect(TokenKind.LCurly);

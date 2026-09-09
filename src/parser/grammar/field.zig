@@ -18,7 +18,7 @@ pub fn parseFieldsDefinition(p: *Parser) !?[]ast.FieldDefinitionNode {
         return null;
     }
 
-    var nodes = std.ArrayList(ast.FieldDefinitionNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.FieldDefinitionNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         const field = try parseFieldDefinition(p);

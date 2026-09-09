@@ -51,8 +51,8 @@ pub const Lexer = struct {
     /// Errors from the allocator are propagated immediately.
     /// The caller is responsible for freeing both slices.
     pub fn lex(self: *Lexer, allocator: Allocator) Allocator.Error!LexResult {
-        var tokens = std.ArrayList(Token).init(allocator);
-        var errors = std.ArrayList(LexerError).init(allocator);
+        var tokens = std.array_list.Managed(Token).init(allocator);
+        var errors = std.array_list.Managed(LexerError).init(allocator);
         errdefer {
             tokens.deinit();
             errors.deinit();
@@ -84,7 +84,7 @@ pub const Lexer = struct {
     /// Returns the first error encountered during lexing.
     /// The caller is responsible for freeing the returned slice.
     pub fn tokenize(self: *Lexer, allocator: Allocator) (Allocator.Error || LexerError)![]Token {
-        var tokens = std.ArrayList(Token).init(allocator);
+        var tokens = std.array_list.Managed(Token).init(allocator);
         errdefer tokens.deinit();
 
         while (try self.next()) |token| {

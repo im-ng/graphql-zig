@@ -13,7 +13,7 @@ pub fn parseVariableDefinitions(p: *Parser) !?[]ast.VariableDefinitionNode {
         return null;
     }
 
-    var nodes = std.ArrayList(ast.VariableDefinitionNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.VariableDefinitionNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         p.debug("parseVariableDefinitions");

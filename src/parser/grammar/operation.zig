@@ -46,7 +46,7 @@ pub fn parseOperationTypeDefinitions(p: *Parser) ![]ast.OperationTypeDefinitionN
     p.debug("parseOperationTypeDefinitions");
     _ = try p.expect(TokenKind.LCurly);
 
-    var nodes = std.ArrayList(ast.OperationTypeDefinitionNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.OperationTypeDefinitionNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         const otd = try parseOperationTypeDefinition(p);
@@ -65,7 +65,7 @@ pub fn parseOptionalOperationTypeDefinitions(p: *Parser) !?[]ast.OperationTypeDe
         return null;
     }
 
-    var nodes = std.ArrayList(ast.OperationTypeDefinitionNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.OperationTypeDefinitionNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         const otd = try parseOperationTypeDefinition(p);

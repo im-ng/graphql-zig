@@ -31,7 +31,7 @@ pub fn parseUnionMemberTypes(p: *Parser) !?[]ast.NamedTypeNode {
     }
 
     _ = try p.expectOptionalToken(TokenKind.Pipe);
-    var nodes = std.ArrayList(ast.NamedTypeNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.NamedTypeNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         const name = try parseNamedType(p);

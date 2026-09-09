@@ -96,7 +96,7 @@ pub fn parseList(p: *Parser, is_const: bool) !ast.ListValueNode {
     p.debug("parseList");
     _ = try p.expect(TokenKind.LBracket);
 
-    var nodes = std.ArrayList(ast.ValueNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.ValueNode).init(p.allocator);
     errdefer nodes.deinit();
     while (!try p.expectOptionalToken(TokenKind.RBracket)) {
         const value = try parseValueLiteral(p, is_const);
@@ -112,7 +112,7 @@ pub fn parseObject(p: *Parser, is_const: bool) !ast.ObjectValueNode {
     p.debug("parseObject");
     _ = try p.expect(TokenKind.LCurly);
 
-    var nodes = std.ArrayList(ast.ObjectFieldNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.ObjectFieldNode).init(p.allocator);
     errdefer nodes.deinit();
     while (!try p.expectOptionalToken(TokenKind.RCurly)) {
         const field = try parseObjectField(p, is_const);

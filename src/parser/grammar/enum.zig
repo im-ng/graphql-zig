@@ -29,7 +29,7 @@ pub fn parseEnumValuesDefinitions(p: *Parser) !?[]ast.EnumValueDefinitionNode {
         return null;
     }
 
-    var nodes = std.ArrayList(ast.EnumValueDefinitionNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.EnumValueDefinitionNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         const value = try parseEnumValueDefinition(p);

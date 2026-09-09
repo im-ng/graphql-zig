@@ -13,7 +13,7 @@ pub fn parseArguments(p: *Parser, is_const: bool) !?[]ast.ArgumentNode {
         return null;
     }
 
-    var nodes = std.ArrayList(ast.ArgumentNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.ArgumentNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         const arg = try parseArgument(p, is_const);
@@ -44,7 +44,7 @@ pub fn parseArgumentDefs(p: *Parser) !?[]ast.InputValueDefinitionNode {
         return null;
     }
 
-    var nodes = std.ArrayList(ast.InputValueDefinitionNode).init(p.allocator);
+    var nodes = std.array_list.Managed(ast.InputValueDefinitionNode).init(p.allocator);
     errdefer nodes.deinit();
     while (true) {
         const arg = try parseInputValueDef(p);
