@@ -118,7 +118,7 @@ pub const OperationType = enum {
 /// See: https://spec.graphql.org/October2021/#SelectionSet
 ///
 /// *SelectionSet*:
-///     **{** Selection* **}**
+///     **{**Selection* **}**
 pub const SelectionSetNode = struct {
     kind: SyntaxKind = SyntaxKind.SelectionSet,
     selections: []const SelectionNode,
@@ -152,7 +152,7 @@ pub const FieldNode = struct {
 /// See: https://spec.graphql.org/October2021/#FragmentSpread
 ///
 /// *FragmentSpread*:
-///     **...** FragmentName Directives?
+///     **...**FragmentName Directives?
 pub const FragmentSpreadNode = struct {
     kind: SyntaxKind = SyntaxKind.FragmentSpread,
     name: NameNode,
@@ -162,7 +162,7 @@ pub const FragmentSpreadNode = struct {
 /// See: https://spec.graphql.org/October2021/#InlineFragment
 ///
 /// *InlineFragment*:
-///     **...** TypeCondition? Directives? SelectionSet
+///     **...**TypeCondition? Directives? SelectionSet
 pub const InlineFragmentNode = struct {
     kind: SyntaxKind = SyntaxKind.InlineFragment,
     type_condition: ?NamedTypeNode,
@@ -182,7 +182,7 @@ pub const NameNode = struct {
 /// See: https://spec.graphql.org/October2021/#Directive
 ///
 /// *Directive[Const]*:
-///     **@** Name Arguments[?Const]?
+///     **@**Name Arguments[?Const]?
 pub const DirectiveNode = struct {
     kind: SyntaxKind = SyntaxKind.Directive,
     name: NameNode,
@@ -192,7 +192,7 @@ pub const DirectiveNode = struct {
 /// See: https://spec.graphql.org/October2021/#Argument
 ///
 /// *Argument[Const]*:
-///    Name **:** Value[?Const]
+///    Name **:**Value[?Const]
 pub const ArgumentNode = struct {
     kind: SyntaxKind = SyntaxKind.Argument,
     name: NameNode,
@@ -229,7 +229,7 @@ pub const ValueNode = union(enum) {
 /// See: https://spec.graphql.org/October2021/#Variable
 ///
 /// *Variable*:
-///     **$** Name
+///     **$**Name
 pub const VariableNode = struct {
     kind: SyntaxKind = SyntaxKind.Variable,
     name: NameNode,
@@ -238,7 +238,7 @@ pub const VariableNode = struct {
 /// See: https://spec.graphql.org/October2021/#StringValue
 ///
 /// *StringValue*:
-///   **"** [^"\\]*(?:\\.[^"\\]*)* **"**
+///   **"**[^"\\]*(?:\\.[^"\\]*)* **"**
 pub const StringValueNode = struct {
     kind: SyntaxKind = SyntaxKind.String,
     value: []const u8,
@@ -256,7 +256,7 @@ pub const IntValueNode = struct {
 /// See: https://spec.graphql.org/October2021/#FloatValue
 ///
 /// *FloatValue*:
-///    **Digit+** **.** **Digit+**
+///    **Digit+****.****Digit+**
 pub const FloatValueNode = struct {
     kind: SyntaxKind = SyntaxKind.Float,
     value: []const u8,
@@ -265,8 +265,8 @@ pub const FloatValueNode = struct {
 /// See: https://spec.graphql.org/October2021/#ListValue
 ///
 /// *ListValue[Const]*:
-///     **[** **]**
-///     **[** Value[?Const]* **]**
+///     **[****]**
+///     **[**Value[?Const]* **]**
 pub const ListValueNode = struct {
     kind: SyntaxKind = SyntaxKind.List,
     values: []const ValueNode,
@@ -275,8 +275,8 @@ pub const ListValueNode = struct {
 /// See: https://spec.graphql.org/October2021/#ObjectValue
 ///
 /// *ObjectValue[Const]*:
-///     **{** **}**
-///     **{** ObjectField[?Const]* **}**
+///     **{****}**
+///     **{**ObjectField[?Const]* **}**
 pub const ObjectValueNode = struct {
     kind: SyntaxKind = SyntaxKind.Object,
     fields: []const ObjectFieldNode,
@@ -285,7 +285,7 @@ pub const ObjectValueNode = struct {
 /// See: https://spec.graphql.org/October2021/#ObjectField
 ///
 /// *ObjectField[Const]*:
-///     Name **:** Value[?Const]
+///     Name **:**Value[?Const]
 pub const ObjectFieldNode = struct {
     kind: SyntaxKind = SyntaxKind.ObjectField,
     name: NameNode,
@@ -295,7 +295,7 @@ pub const ObjectFieldNode = struct {
 /// See: https://spec.graphql.org/October2021/#BooleanValue
 ///
 /// *BooleanValue*:
-///     **true** | **false**
+///     **true**| **false**
 pub const BooleanValueNode = struct {
     kind: SyntaxKind = SyntaxKind.Boolean,
     value: bool,
@@ -312,7 +312,7 @@ pub const NullValueNode = struct {
 /// See: https://spec.graphql.org/October2021/#EnumValue
 ///
 /// *EnumValue*:
-///     Name *but not* **true** *or* **false** *or* **null**
+///     Name *but not* **true***or* **false***or* **null**
 pub const EnumValueNode = struct {
     kind: SyntaxKind = SyntaxKind.Enum,
     value: []const u8,
@@ -321,7 +321,7 @@ pub const EnumValueNode = struct {
 /// See: https://spec.graphql.org/October2021/#VariableDefinition
 ///
 /// *VariableDefinition*:
-///     Variable **:** Type DefaultValue? Directives[Const]?
+///     Variable **:**Type DefaultValue? Directives[Const]?
 ///
 pub const VariableDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.VariableDefinition,
@@ -336,7 +336,7 @@ pub const VariableDefinitionNode = struct {
 /// *Type*:
 ///     NamedType
 ///     ListType
-///         **[** Type **]**
+///         **[**Type **]**
 ///     NonNullType
 ///         NamedType **!**
 ///         ListType **!**
@@ -372,7 +372,7 @@ pub const NamedTypeNode = struct {
 /// See: https://spec.graphql.org/October2021/#ListType
 ///
 /// *ListType*:
-///     **[** Type **]**
+///     **[**Type **]**
 pub const ListTypeNode = struct {
     kind: SyntaxKind = SyntaxKind.ListType,
     type: *TypeNode,
@@ -391,7 +391,7 @@ pub const NonNullTypeNode = struct {
 /// See: https://spec.graphql.org/October2021/#SchemaDefinition
 ///
 /// *SchemaDefinition*:
-///     Description? **schema** Directives[Const]? **{** RootOperationTypeDefinition* **}**
+///     Description? *schema* Directives? *Const* RootOperationTypeDefinition*
 pub const SchemaDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.SchemaDefinition,
     description: ?StringValueNode,
@@ -431,7 +431,7 @@ pub const TypeDefinitionNode = union(enum) {
 /// See: https://spec.graphql.org/October2021/#ScalarTypeDefinition
 ///
 /// *ScalarTypeDefinition*:
-///     Description? **scalar** Name Directives[Const]?
+///     Description? **scalar**Name Directives[Const]?
 pub const ScalarTypeDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.ScalarTypeDefinition,
     description: ?StringValueNode,
@@ -442,7 +442,7 @@ pub const ScalarTypeDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#ObjectTypeDefinition
 ///
 /// *ObjectTypeDefinition*:
-///     Description? **type** Name ImplementsInterfaces? Directives[Const]? FieldsDefinition?
+///     Description? **type**Name ImplementsInterfaces? Directives[Const]? FieldsDefinition?
 pub const ObjectTypeDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.ObjectTypeDefinition,
     name: NameNode,
@@ -455,7 +455,7 @@ pub const ObjectTypeDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#InterfaceTypeDefinition
 ///
 /// *InterfaceTypeDefinition*:
-///     Description? **interface** Name ImplementsInterface? Directives[Const]? FieldsDefinition?
+///     Description? **interface**Name ImplementsInterface? Directives[Const]? FieldsDefinition?
 pub const InterfaceTypeDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.InterfaceTypeDefinition,
     name: NameNode,
@@ -468,7 +468,7 @@ pub const InterfaceTypeDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#UnionTypeDefinition
 ///
 /// *UnionTypeDefinition*:
-///     Description? **union** Name Directives[Const]? UnionDefMemberTypes?
+///     Description? **union**Name Directives[Const]? UnionDefMemberTypes?
 pub const UnionTypeDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.UnionTypeDefinition,
     name: NameNode,
@@ -480,7 +480,7 @@ pub const UnionTypeDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#EnumTypeDefinition
 ///
 /// *EnumTypeDefinition*:
-///     Description? **enum** Name Directives? EnumValuesDefinition?
+///     Description? **enum**Name Directives? EnumValuesDefinition?
 pub const EnumTypeDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.EnumTypeDefinition,
     name: NameNode,
@@ -503,7 +503,7 @@ pub const EnumValueDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#FieldDefinition
 ///
 /// *FieldDefinition*:
-///     Description? Name ArgumentsDefinition? **:** Type Directives[Const]?
+///     Description? Name ArgumentsDefinition? **:**Type Directives[Const]?
 pub const FieldDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.FieldDefinition,
     name: NameNode,
@@ -516,7 +516,7 @@ pub const FieldDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#InputObjectTypeDefinition
 ///
 /// *InputObjectTypeDefinition*:
-///     Description? **input** Name Directives[Const]? InputFieldsDefinition?
+///     Description? **input**Name Directives[Const]? InputFieldsDefinition?
 pub const InputObjectTypeDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.InputObjectTypeDefinition,
     name: NameNode,
@@ -528,7 +528,7 @@ pub const InputObjectTypeDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#InputValueDefinition
 ///
 /// *InputValueDefinition*:
-///     Description? Name **:** Type DefaultValue? Directives[Const]?
+///     Description? Name **:**Type DefaultValue? Directives[Const]?
 pub const InputValueDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.InputValueDefinition,
     name: NameNode,
@@ -540,7 +540,7 @@ pub const InputValueDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#DirectiveDefinition
 ///
 /// *DirectiveDefinition*:
-///     Description? **directive @** Name ArgumentsDefinition? **repeatable**? **on** DirectiveLocations
+///     Description? **directive @**Name ArgumentsDefinition? **repeatable**? **on**DirectiveLocations
 pub const DirectiveDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.DirectiveDefinition,
     description: ?StringValueNode,
@@ -553,7 +553,7 @@ pub const DirectiveDefinitionNode = struct {
 /// See: https://spec.graphql.org/October2021/#FragmentDefinition
 ///
 /// *FragmentDefinition*:
-///     **fragment** FragmentName TypeCondition Directives? SelectionSet
+///     **fragment**FragmentName TypeCondition Directives? SelectionSet
 pub const FragmentDefinitionNode = struct {
     kind: SyntaxKind = SyntaxKind.FragmentDefinition,
     name: NameNode,
@@ -576,8 +576,7 @@ pub const TypeSystemExtensionNode = union(enum) {
 /// See: https://spec.graphql.org/October2021/#SchemaExtension
 ///
 /// *SchemaExtension*:
-///     **extend** **schema** Directives[Const]? **{** RootOperationTypeDefinition* **}**
-///     **extend** **schema** Directives[Const]
+///     extend *schema* Directives? *Const* RootOperationTypeDefinition*
 pub const SchemaExtensionNode = struct {
     kind: SyntaxKind = SyntaxKind.SchemaExtension,
     directives: ?[]const DirectiveNode,
@@ -608,7 +607,7 @@ pub const TypeExtensionNode = union(enum) {
 /// See: https://spec.graphql.org/October2021/#ScalarTypeExtension
 ///
 /// *ScalarTypeExtension*:
-///     **extend** **scalar** Name Directives[Const]
+///     **extend****scalar**Name Directives[Const]
 pub const ScalarTypeExtensionNode = struct {
     kind: SyntaxKind = SyntaxKind.ScalarTypeExtension,
     name: NameNode,
@@ -618,9 +617,9 @@ pub const ScalarTypeExtensionNode = struct {
 /// See: https://spec.graphql.org/October2021/#ObjectTypeExtension
 ///
 /// *ObjectTypeExtension*:
-///     **extend** **type** Name ImplementsInterfaces? Directives[Const]? FieldsDefinition
-///     **extend** **type** Name ImplementsInterfaces? Directives[Const]?
-///     **extend** **type** Name ImplementsInterfaces
+///     **extend****type**Name ImplementsInterfaces? Directives[Const]? FieldsDefinition
+///     **extend****type**Name ImplementsInterfaces? Directives[Const]?
+///     **extend****type**Name ImplementsInterfaces
 pub const ObjectTypeExtensionNode = struct {
     kind: SyntaxKind = SyntaxKind.ObjectTypeExtension,
     name: NameNode,
@@ -632,9 +631,9 @@ pub const ObjectTypeExtensionNode = struct {
 /// See: https://spec.graphql.org/October2021/#InterfaceTypeExtension
 ///
 /// *InterfaceTypeExtension*:
-///     **extend** **interface** Name ImplementsInterface? Directives[Const]? FieldsDefinition
-///     **extend** **interface** Name ImplementsInterface? Directives[Const]
-///     **extend** **interface** Name ImplementsInterface
+///     **extend****interface**Name ImplementsInterface? Directives[Const]? FieldsDefinition
+///     **extend****interface**Name ImplementsInterface? Directives[Const]
+///     **extend****interface**Name ImplementsInterface
 pub const InterfaceTypeExtensionNode = struct {
     kind: SyntaxKind = SyntaxKind.InterfaceTypeExtension,
     name: NameNode,
@@ -646,8 +645,8 @@ pub const InterfaceTypeExtensionNode = struct {
 /// See: https://spec.graphql.org/October2021/#UnionTypeExtension
 ///
 /// *UnionTypeExtension*:
-///     **extend** **union** Name Directives[Const]? UnionDefMemberTypes
-///     **extend** **union** Name Directives[Const]
+///     **extend****union**Name Directives[Const]? UnionDefMemberTypes
+///     **extend****union**Name Directives[Const]
 pub const UnionTypeExtensionNode = struct {
     kind: SyntaxKind = SyntaxKind.UnionTypeExtension,
     name: NameNode,
@@ -658,8 +657,8 @@ pub const UnionTypeExtensionNode = struct {
 /// See: https://spec.graphql.org/October2021/#EnumTypeExtension
 ///
 // *EnumTypeExtension*:
-///    **extend** **enum** Name Directives[Const]? EnumValuesDefinition
-///    **extend** **enum** Name Directives[Const]?
+///    **extend****enum**Name Directives[Const]? EnumValuesDefinition
+///    **extend****enum**Name Directives[Const]?
 pub const EnumTypeExtensionNode = struct {
     kind: SyntaxKind = SyntaxKind.EnumTypeExtension,
     name: NameNode,
@@ -670,8 +669,8 @@ pub const EnumTypeExtensionNode = struct {
 /// See: https://spec.graphql.org/October2021/#InputObjectTypeExtension
 ///
 /// *InputObjectTypeExtension*:
-///     **extend** **input** Name Directives[Const]? InputFieldsDefinition
-///     **extend** **input** Name Directives[Const]
+///     **extend****input**Name Directives[Const]? InputFieldsDefinition
+///     **extend****input**Name Directives[Const]
 pub const InputObjectTypeExtensionNode = struct {
     kind: SyntaxKind = SyntaxKind.InputObjectTypeExtension,
     name: NameNode,

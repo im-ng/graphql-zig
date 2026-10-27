@@ -10,8 +10,10 @@ pub fn build(b: *std.Build) void {
     options.addOption(bool, "debug", debug_mode);
 
     // Export the module so other projects can depend on it.
-    const module = b.addModule("graphql", .{
+            const module = b.addModule("graphql", .{
         .root_source_file = b.path("src/graphql.zig"),
+        .target = target,
+        .optimize = optimize,
     });
     module.addOptions("build_config.zig", options);
 
@@ -33,13 +35,13 @@ pub fn build(b: *std.Build) void {
     const bench_module = b.createModule(.{
         .root_source_file = b.path("bench/bench.zig"),
         .target = target,
-        .optimize = .ReleaseFast,
+        .optimize = .fast,
     });
     bench_module.addImport("graphql", module);
     const bench_exe = b.addExecutable(.{ .name = "bench", .root_module = bench_module });
 
     const run_bench = b.addRunArtifact(bench_exe);
-    if (b.args) |args| run_bench.addArgs(args);
+    run_bench.addPassthruArgs();
 
     const bench_step = b.step("bench", "Run parser/lexer benchmarks");
     bench_step.dependOn(&run_bench.step);
